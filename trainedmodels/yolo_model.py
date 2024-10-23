@@ -29,19 +29,20 @@ import logging
 from ultralytics import YOLO
 import torch
 
-# Configure logging
 logging.basicConfig(level=logging.INFO)
+
+model = YOLO('trainedmodels/yolov5_trained_final.pt')  
+model.to('cpu')  # Ensure it's on CPU
 
 def detect_yolo(image):
     try:
-        model = YOLO('trainedmodels/yolov5_trained_final.pt')  # Your trained model path
-        model.to('cpu')
-        torch.set_grad_enabled(False)
-        results = model(image)
+        with torch.no_grad():  
+            results = model(image)  # Perform detection
         logging.info("Detection successful for image: %s", image)
         return results
     except Exception as e:
-        logging.error("Error loading YOLOv5 model: %s", str(e))
-        raise RuntimeError("Error loading YOLOv5 model: " + str(e))
+        logging.error("Error during detection: %s", str(e))
+        raise RuntimeError("Error during detection: " + str(e))
+
 
 
