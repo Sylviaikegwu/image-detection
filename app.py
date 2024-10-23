@@ -47,8 +47,8 @@ def detect_with_context():
                 # Draw label
                 label = f'{class_name} {confidence}%'
                 # Inside your YOLO drawing code
-                draw.text((bbox[0], bbox[1] - 10), label, fill='blue', font=ImageFont.truetype("arial.ttf", 13))
-                # draw.text((bbox[0], bbox[1] - 10), label, fill='blue')
+                # draw.text((bbox[0], bbox[1] - 10), label, fill='blue', font=ImageFont.truetype("arial.ttf", 13))
+                draw.text((bbox[0], bbox[1] - 10), label, fill='yellow')
                 
                 formatted_detections.append({
                     'class_name': class_name,
