@@ -1,11 +1,13 @@
-# import torch
+import torch
 from ultralytics import YOLO
+
+model = YOLO('trainedmodels/yolov5_trained_final.pt')  
+model.to('cpu')  
+torch.set_grad_enabled(False)  
 
 def detect_yolo(image):
     try:
-        model = YOLO('trainedmodels/yolov5_trained_final.pt')  # Your trained model path
-        model.to('cpu')
-        results = model(image)
-        return results
+        results = model(image)  
+        return results  
     except Exception as e:
-        raise RuntimeError("Error loading YOLOv5 model: " + str(e))
+        raise RuntimeError("Error during YOLOv5 detection: " + str(e))
